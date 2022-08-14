@@ -1,0 +1,5 @@
+{
+  "data-root": "/var/lib/docker",
+  "storage-driver": "vfs",
+  "default-shm-size": "30G"
+}

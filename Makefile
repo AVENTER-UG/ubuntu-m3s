@@ -4,7 +4,7 @@
 TAG=focal
 IMAGENAME=ubuntu-m3s
 IMAGEFULLNAME=avhost/${IMAGENAME}
-LASTCOMMIT=$(shell git log -1 --pretty=short | tail -n 1 | tr -d " " | tr -d "UBDATE:")
+LASTCOMMIT=$(shell git log -1 --pretty=short | tail -n 1 | tr -d " " | tr -d "UPDATE:")
 
 help:
 	    @echo "Makefile arguments:"
@@ -20,7 +20,7 @@ ifeq (${BRANCH}, master)
 	BRANCH=latest
 endif
 
-ifneq ($(shell echo $(LASTCOMMIT) | grep -E '^v([0-9]+\.){0,2}(\*|[0-9]+)'),)
+ifneq ($(shell echo $(LASTCOMMIT) | grep -E '^v|([0-9]+\.){0,2}(\*|[0-9]+)'),)
 	BRANCH=${LASTCOMMIT}
 else
 	BRANCH=latest
@@ -41,4 +41,4 @@ push:
 	docker buildx rm buildkitd
 
 
-all: build push
+all: build

@@ -31,6 +31,8 @@ RUN rm -rf /tmp/cri-dockerd
 RUN curl -k -L https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service > /etc/systemd/system/cri-docker.service && \
     curl -k -L https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket > /etc/systemd/system/cri-docker.socket 
 
+RUN mkdir -p /var/lib/rancher/k3s/docker    
+
 
 RUN groupadd docker
 

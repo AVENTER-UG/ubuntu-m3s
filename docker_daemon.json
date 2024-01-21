@@ -1,5 +1,5 @@
 {
-  "data-root": "/var/lib/docker",
+  "data-root": "/var/lib/rancher/k3s/docker",
   "storage-driver": "vfs",
   "default-shm-size": "30G"
 }

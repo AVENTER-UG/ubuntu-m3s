@@ -15,10 +15,11 @@ else
 	BRANCH=latest
 endif
 
+BRANCH=22.04-3
 
 build:
 	@echo ">>>> Build docker image"
-	docker build -t ${IMAGEFULLNAME}:${BRANCH} .
+	docker build -t ${IMAGEFULLNAME}:latest .
 
 push:
 	@echo ">>>> Publish docker image" ${BRANCH}

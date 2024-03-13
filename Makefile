@@ -15,7 +15,7 @@ else
 	BRANCH=latest
 endif
 
-BRANCH=22.04-3
+BRANCH=22.04-4
 
 build:
 	@echo ">>>> Build docker image"

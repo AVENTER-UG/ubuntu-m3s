@@ -5,9 +5,10 @@ LABEL org.opencontainers.image.description="Container image with preconfigured u
 LABEL org.opencontainers.image.vendor="AVENTER UG (haftungsbeschränkt)"
 LABEL org.opencontainers.image.source="https://github.com/AVENTER-UG/"
 
-RUN apt-get update -y
-RUN apt-get install -y wget jq containerd dnsmasq tcpdump curl inetutils-ping iptables fuse-overlayfs procps bash iproute2 dnsutils net-tools systemctl socat conntrack tzdata
-RUN apt-get upgrade -y
+RUN apt update -y
+RUN apt install -y wget jq containerd dnsmasq tcpdump curl inetutils-ping iptables 
+RUN apt install -y fuse-overlayfs procps bash iproute2 dnsutils net-tools systemctl socat conntrack tzdata 
+RUN apt install -y nfs-common rpcbind
 RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
 
 # Prepare systemd environment.

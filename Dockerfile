@@ -5,24 +5,25 @@ LABEL org.opencontainers.image.description="Container image with preconfigured u
 LABEL org.opencontainers.image.vendor="AVENTER UG (haftungsbeschränkt)"
 LABEL org.opencontainers.image.source="https://github.com/AVENTER-UG/"
 
-RUN apt update -y
+RUN apt -y update 
+RUN apt -y upgrade 
 RUN apt install -y wget jq containerd dnsmasq tcpdump curl inetutils-ping iptables 
 RUN apt install -y fuse-overlayfs procps bash iproute2 dnsutils net-tools systemctl socat conntrack tzdata 
 RUN apt install -y nfs-common rpcbind
 RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
 
 # Prepare systemd environment.
-ENV container docker
+ENV container=docker
 
 RUN ARCH=`uname -m` && \
-    curl -k -L https://download.docker.com/linux/static/stable/${ARCH}/docker-24.0.6.tgz | tar -xvz -C /usr/local/bin --strip 1 && \
+    curl -k -L https://download.docker.com/linux/static/stable/${ARCH}/docker-24.0.7.tgz | tar -xvz -C /usr/local/bin --strip 1 && \
     mkdir -p /etc/docker 
 
 RUN mkdir /usr/lib/cni/
 RUN ARCH=`dpkg --print-architecture` && \
-    curl -k -L https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd-0.3.4.${ARCH}.tgz | tar -xvz -C /tmp && \
-    curl -k -L https://github.com/flannel-io/cni-plugin/releases/download/v1.1.2/cni-plugin-flannel-linux-${ARCH}-v1.1.2.tgz | tar -xvz -C /usr/lib/cni/ && \
-    curl -k -L https://github.com/containernetworking/plugins/releases/download/v1.1.1/cni-plugins-linux-${ARCH}-v1.1.1.tgz | tar -xvz -C /usr/lib/cni/
+    curl -k -L https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.17/cri-dockerd-0.3.17.${ARCH}.tgz | tar -xvz -C /tmp && \
+    curl -k -L https://github.com/flannel-io/cni-plugin/releases/download/v1.7.1-flannel1/cni-plugin-flannel-linux-${ARCH}-v1.7.1-flannel1.tgz | tar -xvz -C /usr/lib/cni/ && \
+    curl -k -L https://github.com/containernetworking/plugins/releases/download/v1.7.1/cni-plugins-linux-${ARCH}-v1.7.1.tgz | tar -xvz -C /usr/lib/cni/
 
 RUN ARCH=`dpkg --print-architecture` && \
     mv /usr/lib/cni/flannel-${ARCH} /usr/lib/cni/flannel

@@ -1,4 +1,4 @@
-FROM  ubuntu:22.04
+FROM  ubuntu:24.04
 LABEL maintainer="Andreas Peters <support@aventer.biz>"
 LABEL org.opencontainers.image.title="ubuntu-m3s" 
 LABEL org.opencontainers.image.description="Container image with preconfigured ubuntu for mesos m3s"
@@ -16,7 +16,7 @@ RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
 ENV container=docker
 
 RUN ARCH=`uname -m` && \
-    curl -k -L https://download.docker.com/linux/static/stable/${ARCH}/docker-24.0.7.tgz | tar -xvz -C /usr/local/bin --strip 1 && \
+    curl -k -L https://download.docker.com/linux/static/stable/${ARCH}/docker-28.2.2.tgz | tar -xvz -C /usr/local/bin --strip 1 && \
     mkdir -p /etc/docker 
 
 RUN mkdir /usr/lib/cni/

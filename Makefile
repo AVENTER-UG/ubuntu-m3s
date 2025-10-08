@@ -1,7 +1,7 @@
 #Dockerfile vars
 
 #vars
-TAG=24.04-1
+TAG=24.04-2
 BRANCH=${TAG}
 IMAGENAME=ubuntu-m3s
 IMAGEFULLNAME=avhost/${IMAGENAME}
@@ -11,7 +11,7 @@ BUILDDATE=$(shell date -u +%Y%m%d)
 
 build:
 	@echo ">>>> Build docker image" ${BRANCH}_${BUILDDATE} 
-	docker build -t ${IMAGEFULLNAME}:latest .
+	docker buildx build --progress=plain --load -t ${IMAGEFULLNAME}:latest .
 
 push:
 	@echo ">>>> Publish docker image" ${BRANCH} ${BRANCHSHORT}
